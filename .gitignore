@@ -1,4 +1,7 @@
+# Generated files
 __pycache__/
+.musicxml
+*.py[oc]
 
 # Virtual environments
 .venv
