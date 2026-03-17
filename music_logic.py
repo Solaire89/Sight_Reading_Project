@@ -1,4 +1,4 @@
-from constants import note_dictionary_sharp, note_dictionary_flat, keys_with_flats, keys_with_sharps
+from constants import  keys_with_flats, keys_with_sharps
 
 def generate_major_scale(starting_note):
     intervals = [2, 2, 1, 2, 2, 2, 1]

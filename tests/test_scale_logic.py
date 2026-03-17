@@ -1,4 +1,4 @@
-from Sight_Reading_Project.music_logic import generate_major_scale
+from music_logic import generate_major_scale
 
 def test():
     correct_scale = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C']
