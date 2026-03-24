@@ -27,3 +27,20 @@ keys_with_sharps = {
     'G': 10,
     'G#': 11
 }
+
+fifths_keys_element = {
+    'C': 0,
+    'F': -1,
+    'Bb': -2,
+    'Eb': -3,
+    'Ab': -4,
+    'Db': -5,
+    'Gb': -6,
+    'B':  5,
+    'E': 4,
+    'A': 3,
+    'D': 2,
+    'G': 1
+}
+
+musicxml_head = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<!DOCTYPE score-partwise PUBLIC\n   "-//Recordare//DTD MusicXML 4.0 Partwise//EN"\n   "http://www.musicxml.org/dtds/partwise.dtd">'
