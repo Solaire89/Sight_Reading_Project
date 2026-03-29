@@ -1,11 +1,11 @@
-from constants import keys_with_flats, keys_with_sharps
+from constants import note_names_in_flat_keys, note_names_in_sharp_keys
 
 def generate_major_scale(starting_note):
     intervals = [2, 2, 1, 2, 2, 2, 1]
-    if starting_note in keys_with_sharps:
-        scale = keys_with_sharps
-    elif starting_note in keys_with_flats:
-        scale = keys_with_flats
+    if starting_note in note_names_in_sharp_keys:
+        scale = note_names_in_sharp_keys
+    elif starting_note in note_names_in_flat_keys:
+        scale = note_names_in_flat_keys
     
     else:
         return "Invalid scale name, please try again."

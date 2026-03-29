@@ -1,4 +1,4 @@
-keys_with_flats = {
+note_names_in_flat_keys = {
     'A': 0,
     'Bb': 1,
     'B': 2,
@@ -13,7 +13,7 @@ keys_with_flats = {
     'Ab': 11
 }
 
-keys_with_sharps = {
+note_names_in_sharp_keys = {
     'A': 0,
     'A#': 1,
     'B': 2,
@@ -43,4 +43,4 @@ fifths_keys_element = {
     'G': 1
 }
 
-musicxml_head = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<!DOCTYPE score-partwise PUBLIC\n   "-//Recordare//DTD MusicXML 4.0 Partwise//EN"\n   "http://www.musicxml.org/dtds/partwise.dtd">'
+musicxml_head = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<!DOCTYPE score-partwise PUBLIC\n   "-//Recordare//DTD MusicXML 4.0 Partwise//EN"\n   "http://www.musicxml.org/dtds/partwise.dtd">\n <score-partwise version="4.0">'
