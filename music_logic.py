@@ -27,4 +27,14 @@ def generate_major_scale(starting_note):
     
     return major_scale_notes
 
-print(generate_major_scale('Db'))
+# Note contents: <pitch> (<step> and <octave> within pitch), alter (flat or sharp),
+# duration (length of note in numbers), note type (quarter, half, whole, etc)
+def generate_note(note, octave, duration, note_type, alter=None):
+    if alter == 1 or alter == -1:
+        note = f'<note><pitch><step>{note}</step><alter>{alter}</alter><octave>{octave}</octave></pitch>'
+    else:
+        note = f'<note><pitch><step>{note}</step><octave>{octave}</octave></pitch>'
+    note += f'<duration>{duration}</duration><type>{note_type}</type></note>'
+    return note
+
+print(generate_note('C', 4, 4, 'whole', 1))
