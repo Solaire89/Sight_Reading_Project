@@ -29,12 +29,14 @@ def generate_major_scale(starting_note):
 
 # Note contents: <pitch> (<step> and <octave> within pitch), alter (flat or sharp),
 # duration (length of note in numbers), note type (quarter, half, whole, etc)
-def generate_note(note, octave, duration, note_type, alter=None):
-    if alter == 1 or alter == -1:
-        note = f'<note><pitch><step>{note}</step><alter>{alter}</alter><octave>{octave}</octave></pitch>'
+def generate_note(step, octave, duration, note_type, alter=None):
+    if alter is not None:
+        note = f'<note><pitch><step>{step}</step><alter>{alter}</alter><octave>{octave}</octave></pitch>'
     else:
-        note = f'<note><pitch><step>{note}</step><octave>{octave}</octave></pitch>'
+        note = f'<note><pitch><step>{step}</step><octave>{octave}</octave></pitch>'
     note += f'<duration>{duration}</duration><type>{note_type}</type></note>'
     return note
 
-print(generate_note('C', 4, 4, 'whole', 1))
+print(generate_note("C", 5, 4, "quarter"))
+print(generate_note("F", 5, 4, "quarter", alter=1))
+print(generate_note("G", 3, 2, "half", 0))
