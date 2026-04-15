@@ -37,6 +37,11 @@ def generate_note(step, octave, duration, note_type, alter=None):
     note += f'<duration>{duration}</duration><type>{note_type}</type></note>'
     return note
 
-print(generate_note("C", 5, 4, "quarter"))
-print(generate_note("F", 5, 4, "quarter", alter=1))
-print(generate_note("G", 3, 2, "half", 0))
+# This is the overall form of the music. Includes elements like key, clef, and time signature
+def create_attributes(divisions, fifths, beats, beat_type, sign, clef_line):
+    return f'''<attributes><divisions>{divisions}</divisions>
+    <key><fifths>{fifths}</fifths></key>
+    <time><beats>{beats}</beats><beat-type>{beat_type}</beat-type></time>
+    <clef><sign>{sign}</sign><line>{clef_line}</line></clef></attributes>'''
+
+print(create_attributes(4, 0, 4, 4, "G", 2))
