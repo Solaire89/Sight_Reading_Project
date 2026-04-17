@@ -43,4 +43,15 @@ fifths_keys_element = {
     'G': 1
 }
 
-musicxml_head = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<!DOCTYPE score-partwise PUBLIC\n   "-//Recordare//DTD MusicXML 4.0 Partwise//EN"\n   "http://www.musicxml.org/dtds/partwise.dtd">\n <score-partwise version="4.0">'
+musicxml_head = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC
+   "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
+    "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="4.0">
+<part-list>
+    <score-part id="P1">
+      <part-name>Sight Reading Melody</part-name>
+    </score-part>
+</part-list>'''
+
+musicxml_footer = '</part>\n</score-partwise>'
