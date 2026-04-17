@@ -25,14 +25,23 @@ def create_attributes(divisions, fifths, beats, beat_type, sign, clef_line):
     <clef><sign>{sign}</sign><line>{clef_line}</line></clef></attributes>'''
 
 
-
+# Each measure needs to be wrapped by the measure tag. The first part of the piece requires the
+# attributes section.
 def create_measure(notes, measure_number, attributes=None):
     if attributes:
-        measure = f"<measure number={measure_number}>" + attributes + notes + "</measure>"
+        measure = f'<measure number="{measure_number}">' + attributes + "\n".join(notes) + '</measure>'
     else:
-        measure = f"<measure number={measure_number}>{notes}</measure>"
+        measure = f'<measure number="{measure_number}">{"\n".join(notes)}</measure>'
     return measure
 
-attribute = create_attributes(4, 0, 4, 4, "g", 2)
-note = generate_note("C", 4, 4, "whole",)
-print(create_measure(note, 1, attribute))
+
+
+note1 = generate_note("C", 4, 4, "quarter")
+note2 = generate_note("D", 4, 4, "quarter")
+note3 = generate_note("E", 4, 4, "quarter")
+note4 = generate_note("F", 4, 4, "quarter")
+
+notes_list = [note1, note2, note3, note4]
+attrs = create_attributes(4, 0, 4, 4, "G", 2)
+
+print(create_measure(notes_list, 1, attrs))
