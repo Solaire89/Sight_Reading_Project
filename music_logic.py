@@ -1,5 +1,7 @@
 from constants import note_names_in_flat_keys, note_names_in_sharp_keys
+from musicxml_node import generate_note
 
+# Takes an input starting_note and returns the scale associated with that root note
 def generate_major_scale(starting_note):
     intervals = [2, 2, 1, 2, 2, 2, 1]
     if starting_note in note_names_in_sharp_keys:
@@ -27,21 +29,13 @@ def generate_major_scale(starting_note):
     
     return major_scale_notes
 
-# Note contents: <pitch> (<step> and <octave> within pitch), alter (flat or sharp),
-# duration (length of note in numbers), note type (quarter, half, whole, etc)
-def generate_note(step, octave, duration, note_type, alter=None):
-    if alter is not None:
-        note = f'<note><pitch><step>{step}</step><alter>{alter}</alter><octave>{octave}</octave></pitch>'
-    else:
-        note = f'<note><pitch><step>{step}</step><octave>{octave}</octave></pitch>'
-    note += f'<duration>{duration}</duration><type>{note_type}</type></note>'
-    return note
+# Creating the difficulty guardrails
+def difficulty_settings(difficulty):
+    # Add a try block here?
+    difficulty = input("Choose a difficulty setting: Easy, Medium, or Hard")
+    return difficulty
 
-# This is the overall form of the music. Includes elements like key, clef, and time signature
-def create_attributes(divisions, fifths, beats, beat_type, sign, clef_line):
-    return f'''<attributes><divisions>{divisions}</divisions>
-    <key><fifths>{fifths}</fifths></key>
-    <time><beats>{beats}</beats><beat-type>{beat_type}</beat-type></time>
-    <clef><sign>{sign}</sign><line>{clef_line}</line></clef></attributes>'''
 
-print(create_attributes(4, 0, 4, 4, "G", 2))
+# Create a melody from the 
+def create_easy_melody(starting_note, starting_octave):
+    starting_note = generate_note(starting_note)
