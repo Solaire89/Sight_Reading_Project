@@ -1,5 +1,6 @@
 from constants import note_names_in_flat_keys, note_names_in_sharp_keys
-from musicxml_node import generate_note
+from musicxml_node import generate_note, create_attributes
+import random
 
 # Takes an input starting_note and returns the scale associated with that root note
 def generate_major_scale(starting_note):
@@ -27,15 +28,16 @@ def generate_major_scale(starting_note):
         if i in major_scale_index:
             major_scale_notes.append(note)
     
+    # Returns a list of the notes in the scale
     return major_scale_notes
-
-# Creating the difficulty guardrails
-def difficulty_settings(difficulty):
-    # Add a try block here?
-    difficulty = input("Choose a difficulty setting: Easy, Medium, or Hard")
-    return difficulty
 
 
 # Create a melody from the 
-def create_easy_melody(starting_note, starting_octave):
-    starting_note = generate_note(starting_note)
+def create_melody(key, num_notes):
+    scale = generate_major_scale(key)
+    print(f"Scale: {scale}")
+    for note in range(num_notes):
+        next_note = random.choice(scale)
+        print(f"Next note: {next_note}")
+
+print(create_melody("Db", 10))
