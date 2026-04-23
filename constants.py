@@ -43,6 +43,15 @@ fifths_keys_element = {
     'G': 1
 }
 
+DIFFICULTY_SETTINGS = {
+    'easy': {
+        'max_interval': 4,
+        'range_octaves': 1,
+        'rhythms': ['whole', 'half', 'quarter'],
+        'starting_note': 'tonic'
+    }
+}
+
 musicxml_head = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
    "-//Recordare//DTD MusicXML 4.0 Partwise//EN"

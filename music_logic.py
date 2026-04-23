@@ -1,4 +1,4 @@
-from constants import note_names_in_flat_keys, note_names_in_sharp_keys
+from constants import * # note_names_in_flat_keys, note_names_in_sharp_keys, DIFFICULTY_SETTINGS
 from musicxml_node import generate_note, create_attributes
 import random
 
@@ -32,12 +32,16 @@ def generate_major_scale(starting_note):
     return major_scale_notes
 
 
-# Create a melody from the 
-def create_melody(key, num_notes):
+# Create a melody from the key provided (a string) with the number of notes provided
+# Difficulty will determine all of the elements to be added to each sequence of notes
+def create_melody(key, num_notes, difficulty):
     scale = generate_major_scale(key)
-    print(f"Scale: {scale}")
+    settings = DIFFICULTY_SETTINGS[difficulty]
+    max_interval = settings['max_interval']
+    print(max_interval)
     for note in range(num_notes):
-        next_note = random.choice(scale)
-        print(f"Next note: {next_note}")
-
-print(create_melody("Db", 10))
+        next_note = generate_note(random.choice(scale))
+        # generate note function signature:
+        # generate_note(step, octave, duration, note_type, alter=None)
+        
+print(create_melody('C', 4, 'easy'))
