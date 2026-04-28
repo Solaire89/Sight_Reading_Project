@@ -45,25 +45,34 @@ fifths_keys_element = {
 
 DIFFICULTY_SETTINGS = {
     'easy': {
-        'max_interval': 5,
-        'range_octaves': 2,
+        'max_interval': 4,
+        'range_octaves': 1,
         'rhythms': ['whole', 'half', 'quarter'],
+        'rests': None,
         'starting_note': 'tonic'
     },
     'medium': {
         'max_interval': 7,
-        'range_octaves': 1,
-        'rhythms': ['whole', 'half', 'quarter'],
-        'rests': ['whole', 'dotted_whole', 'dotted_quarter', 'quarter', 'half'],
+        'range_octaves': 2,
+        'rhythms': ['whole', 'half', 'quarter', 'eighth', '16th'],
+        'rests': ['whole', 'half', 'quarter'],
         'starting_note': 'tonic'
     },
     'hard': {
         'max_interval': 12,
         'range_octaves': 3,
-        'rhythms': ['whole', 'half', 'quarter'],
-        'rests': ['whole', 'dotted_whole', 'dotted_quarter', 'quarter', 'half', 'sixteenth'],
+        'rhythms': ['whole', 'half', 'quarter', 'eighth', '16th'],
+        'rests': ['whole',  'half', 'quarter', 'eighth', '16th'],
         'starting_note': 'tonic'
     }
+}
+
+RHYTHM_MAPPING = {
+    'whole':{'duration': 16, 'type': 'whole'},
+    'half':{'duration': 8, 'type': 'half'},
+    'quarter':{'duration': 4, 'type': 'quarter'},
+    'eighth':{'duration': 2, 'type': 'eighth'},
+    '16th':{'duration': 1, 'type': '16th'}
 }
 
 musicxml_head = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
