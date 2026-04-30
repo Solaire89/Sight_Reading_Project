@@ -38,6 +38,7 @@ def create_full_score(measures):
     # combine everything
     return musicxml_head + '<part id="P1">' + "\n".join(measures) + musicxml_footer
 
+# Test to generate a musicxml file
 note1 = generate_note("C", 4, 4, "quarter")
 note2 = generate_note("D", 4, 4, "quarter")
 note3 = generate_note("E", 4, 4, "quarter")

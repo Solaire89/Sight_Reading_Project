@@ -34,14 +34,40 @@ def generate_major_scale(starting_note):
 
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
-def create_melody(key, num_notes, difficulty):
+'''def create_melody(key, num_notes, difficulty):
     scale = generate_major_scale(key)
     settings = DIFFICULTY_SETTINGS[difficulty]
     max_interval = settings['max_interval']
+    duration = settings[]
     print(max_interval)
     for note in range(num_notes):
-        next_note = generate_note(random.choice(scale))
+        next_note = generate_note(
+            # Step
+            random.choice(scale), 
+            # Octave (need to be mindful of largest interval per difficulty)
+            random.choice())'''
+            # Duration
+            # Note_type
+            # Alter
         # generate note function signature:
         # generate_note(step, octave, duration, note_type, alter=None)
-        
-print(create_melody('C', 4, 'easy'))
+
+def generate_rhythm(difficulty):
+    possible_rhythms = DIFFICULTY_SETTINGS[difficulty]['rhythms']
+    # 'rhythms': ['whole', 'half', 'quarter']
+    remaining_count = 16
+    rhythm = []
+    current_duration = 0
+    available_rhythms = []
+    for rhythm_value in possible_rhythms:
+        available_rhythms.append(rhythm_value)
+    # available_rhythms = list(filter(
+    #     lambda x: RHYTHM_MAPPING[x]['duration'] <= remaining_count, 
+    #     possible_rhythms))
+    while current_duration < remaining_count:
+        rhythm.append(random.choice(available_rhythms))
+        remaining_count -= current_duration
+    return rhythm
+
+print(generate_rhythm('easy'))
+
