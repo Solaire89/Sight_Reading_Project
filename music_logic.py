@@ -52,22 +52,30 @@ def generate_major_scale(starting_note):
         # generate note function signature:
         # generate_note(step, octave, duration, note_type, alter=None)
 
+# def rhythm_list(possible_rhythms):
+#     available_rhythms = []
+#     remaining_count = 0
+#     for rhythm in possible_rhythms:
+#         if rhythm <= remaining_count:
+#             available_rhythms.append(possible_rhythms)
+#     return available_rhythms
+
 def generate_rhythm(difficulty):
     possible_rhythms = DIFFICULTY_SETTINGS[difficulty]['rhythms']
     # 'rhythms': ['whole', 'half', 'quarter']
-    remaining_count = 16
+    remaining_duration = 16
     rhythm = []
     current_duration = 0
     available_rhythms = []
-    for rhythm_value in possible_rhythms:
-        available_rhythms.append(rhythm_value)
-    # available_rhythms = list(filter(
-    #     lambda x: RHYTHM_MAPPING[x]['duration'] <= remaining_count, 
-    #     possible_rhythms))
-    while current_duration < remaining_count:
-        rhythm.append(random.choice(available_rhythms))
-        remaining_count -= current_duration
+    
+    while current_duration < remaining_duration:
+        available_rhythms = list(filter(
+            lambda x: RHYTHM_MAPPING[x]['duration'] <= remaining_duration, 
+            possible_rhythms))
+        current_rhythm = random.choice(available_rhythms)
+        rhythm.append(current_rhythm)
+        remaining_duration -= RHYTHM_MAPPING[current_rhythm]['duration']
     return rhythm
 
-print(generate_rhythm('easy'))
+print(generate_rhythm('medium'))
 
