@@ -49,7 +49,6 @@ DIFFICULTY_SETTINGS = {
         'range_octaves': 1,
         'rhythms': ['whole', 'half', 'quarter'],
         'rests': None,
-        'division': 4,
         'starting_note': 'tonic'
     },
     'medium': {
@@ -57,7 +56,6 @@ DIFFICULTY_SETTINGS = {
         'range_octaves': 2,
         'rhythms': ['whole', 'half', 'quarter', 'eighth', '16th'],
         'rests': ['whole', 'half', 'quarter'],
-        'division': 16,
         'starting_note': 'tonic'
     },
     'hard': {
@@ -65,7 +63,6 @@ DIFFICULTY_SETTINGS = {
         'range_octaves': 3,
         'rhythms': ['whole', 'half', 'quarter', 'eighth', '16th'],
         'rests': ['whole',  'half', 'quarter', 'eighth', '16th'],
-        'division': 16,
         'starting_note': 'tonic'
     }
 }
