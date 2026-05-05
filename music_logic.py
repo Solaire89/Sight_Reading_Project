@@ -4,10 +4,12 @@ import random
 
 # Takes an input starting_note and returns the scale associated with that root note
 def generate_major_scale(starting_note):
+    flat_keys = ['C', 'F', 'Bb', 'Eb', 'Ab', 'Gb', 'Cb']
+    sharp_keys = ['G', 'D', 'A', 'E', 'B']
     intervals = [2, 2, 1, 2, 2, 2, 1]
-    if starting_note in note_names_in_flat_keys:
+    if starting_note in flat_keys:
         scale = note_names_in_flat_keys
-    elif starting_note in note_names_in_sharp_keys:
+    elif starting_note in sharp_keys:
         scale = note_names_in_sharp_keys
     
     else:
@@ -50,18 +52,22 @@ def generate_rhythm(difficulty):
 
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
-'''def create_melody(key, num_notes, difficulty):
+def create_melody(key, num_notes, difficulty):
+    # Making a list of note 
+    rhythms = generate_rhythm(difficulty)
     scale = generate_major_scale(key)
     settings = DIFFICULTY_SETTINGS[difficulty]
     max_interval = settings['max_interval']
-    duration = settings[]
-    print(max_interval)
+    max_range = settings['range_semitones']
+
+    for rhythm in rhythms:
+        
     for note in range(num_notes):
         next_note = generate_note(
             # Step
             random.choice(scale), 
             # Octave (need to be mindful of largest interval per difficulty)
-            random.choice())'''
+            random.choice())
             # Duration
             # Note_type
             # Alter
@@ -70,5 +76,5 @@ def generate_rhythm(difficulty):
 
 
 print(generate_rhythm('hard'))
-print(generate_major_scale('F'))
+print(generate_major_scale('A'))
 
