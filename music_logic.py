@@ -33,6 +33,7 @@ def generate_major_scale(starting_note):
     # Returns a list of the notes in the scale
     return major_scale_notes
 
+# Returns a list of rhythms to be paired with notes
 def generate_rhythm(difficulty):
     possible_rhythms = DIFFICULTY_SETTINGS[difficulty]['rhythms']
     # 'rhythms': ['whole', 'half', 'quarter']
@@ -50,17 +51,35 @@ def generate_rhythm(difficulty):
         remaining_duration -= RHYTHM_MAPPING[current_rhythm]['duration']
     return rhythm
 
+def get_valid_notes_in_range(scale, start_octave, num_octaves, difficulty):
+    # build list of (note, octave) tuples
+    # return valid_notes
+    scale = generate_major_scale(input('Please enter a note to start on:'))
+    start_octave = input('Select which octave to start at (middle C is C4)')
+    num_octaves = DIFFICULTY_SETTINGS[difficulty]['range_octave']
+    for octave in num_octaves:
+        for note in scale:
+            note_with_octave = (note, octave)
+    print(f"Scale: {scale}")
+    while 
+    pass
+
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
-def create_melody(key, num_notes, difficulty):
+def create_melody(key, difficulty):
     # Making a list of note 
     rhythms = generate_rhythm(difficulty)
     scale = generate_major_scale(key)
+    num_notes = len(rhythms)
     settings = DIFFICULTY_SETTINGS[difficulty]
     max_interval = settings['max_interval']
-    max_range = settings['range_semitones']
+    max_range = settings['range_octave']
 
+    # Make it so that if the number in octave changes, the semitones will be at least 12
+    # semitone_total = (octave difference * 12) + semitone
     for rhythm in rhythms:
+        # Rhythm object = 'whole', 'half', etc
+        
         
     for note in range(num_notes):
         next_note = generate_note(
