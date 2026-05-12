@@ -51,18 +51,20 @@ def generate_rhythm(difficulty):
         remaining_duration -= RHYTHM_MAPPING[current_rhythm]['duration']
     return rhythm
 
-def get_valid_notes_in_range(scale, start_octave, num_octaves, difficulty):
+def get_valid_notes_in_range(scale, start_octave, difficulty):
     # build list of (note, octave) tuples
     # return valid_notes
-    scale = generate_major_scale(input('Please enter a note to start on:'))
-    start_octave = input('Select which octave to start at (middle C is C4)')
+    valid_notes = []
     num_octaves = DIFFICULTY_SETTINGS[difficulty]['range_octave']
-    for octave in num_octaves:
-        for note in scale:
-            note_with_octave = (note, octave)
-    print(f"Scale: {scale}")
-    while 
-    pass
+    for octave in range(start_octave + num_octaves + 1):
+        if octave == start_octave + num_octaves:
+            valid_notes.append((scale[0], octave))
+        else:
+            for note in scale:
+                valid_notes.append((note, octave))
+    return valid_notes
+
+print(get_valid_notes_in_range())
 
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
@@ -93,7 +95,4 @@ def create_melody(key, difficulty):
         # generate note function signature:
         # generate_note(step, octave, duration, note_type, alter=None)
 
-
-print(generate_rhythm('hard'))
-print(generate_major_scale('A'))
 
