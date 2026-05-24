@@ -46,26 +46,28 @@ fifths_keys_element = {
 DIFFICULTY_SETTINGS = {
     'easy': {
         'max_interval': 4,
-        'range_octave': 12,
+        'range_octave': 1,
         'rhythms': ['whole', 'half', 'quarter'],
         'rests': None,
         'starting_note': 'tonic'
     },
     'medium': {
         'max_interval': 7,
-        'range_octave': 24,
+        'range_octave': 2,
         'rhythms': ['whole', 'half', 'quarter', 'eighth', '16th'],
         'rests': ['whole', 'half', 'quarter'],
         'starting_note': 'tonic'
     },
     'hard': {
         'max_interval': 12,
-        'range_octave': 36,
+        'range_octave': 3,
         'rhythms': ['whole', 'half', 'quarter', 'eighth', '16th'],
         'rests': ['whole',  'half', 'quarter', 'eighth', '16th'],
         'starting_note': 'tonic'
     }
 }
+
+
 
 RHYTHM_MAPPING = {
     'whole':{'duration': 16, 'type': 'whole'},

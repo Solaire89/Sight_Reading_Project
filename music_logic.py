@@ -51,12 +51,13 @@ def generate_rhythm(difficulty):
         remaining_duration -= RHYTHM_MAPPING[current_rhythm]['duration']
     return rhythm
 
+# Returns a list of tuples of notes to use in generating a melody (note, octave)
 def get_valid_notes_in_range(scale, start_octave, difficulty):
     # build list of (note, octave) tuples
     # return valid_notes
     valid_notes = []
     num_octaves = DIFFICULTY_SETTINGS[difficulty]['range_octave']
-    for octave in range(start_octave + num_octaves + 1):
+    for octave in range(start_octave, start_octave + num_octaves + 1):
         if octave == start_octave + num_octaves:
             valid_notes.append((scale[0], octave))
         else:
@@ -64,35 +65,35 @@ def get_valid_notes_in_range(scale, start_octave, difficulty):
                 valid_notes.append((note, octave))
     return valid_notes
 
-print(get_valid_notes_in_range())
-
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
 def create_melody(key, difficulty):
     # Making a list of note 
     rhythms = generate_rhythm(difficulty)
     scale = generate_major_scale(key)
-    num_notes = len(rhythms)
-    settings = DIFFICULTY_SETTINGS[difficulty]
-    max_interval = settings['max_interval']
-    max_range = settings['range_octave']
+    pool_of_notes = get_valid_notes_in_range(scale, 4, difficulty)
+    print(f"Current pool of notes: {pool_of_notes}")
+    pass
+    # num_notes = len(rhythms)
+    # settings = DIFFICULTY_SETTINGS[difficulty]
+    # max_interval = settings['max_interval']
+    # max_range = settings['range_octave']
 
-    # Make it so that if the number in octave changes, the semitones will be at least 12
-    # semitone_total = (octave difference * 12) + semitone
-    for rhythm in rhythms:
-        # Rhythm object = 'whole', 'half', etc
+    # # Make it so that if the number in octave changes, the semitones will be at least 12
+    # # semitone_total = (octave difference * 12) + semitone
+    # for rhythm in rhythms:
+    #     # Rhythm object = 'whole', 'half', etc
         
         
-    for note in range(num_notes):
-        next_note = generate_note(
-            # Step
-            random.choice(scale), 
-            # Octave (need to be mindful of largest interval per difficulty)
-            random.choice())
-            # Duration
+    # for note in range(num_notes):
+    #     next_note = generate_note(
+    #         # Step
+    #         random.choice(scale), 
+    #         # Octave (need to be mindful of largest interval per difficulty)
+    #         random.choice())
+    #         # Duration
             # Note_type
             # Alter
         # generate note function signature:
         # generate_note(step, octave, duration, note_type, alter=None)
-
 
