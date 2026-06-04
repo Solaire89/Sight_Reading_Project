@@ -15,15 +15,14 @@ def generate_major_scale(starting_note: str) -> list[str]:
     else:
         raise KeyError("Invalid scale name, please try again.")
     major_scale_index = []
-
-    current_position_index = notes[starting_note]
+    current_position_int = notes[starting_note]
 
     # Building the indices of the major scales
     for interval in intervals:
-        major_scale_index.append(current_position_index)
-        current_position_index += interval
-        if current_position_index > 11:
-            current_position_index %= 12
+        major_scale_index.append(current_position_int)
+        current_position_int += interval
+        if current_position_int > 11:
+            current_position_int %= 12
         
     
     major_scale_notes = []
@@ -54,8 +53,8 @@ def generate_rhythm(difficulty: str) -> list[str]:
 
 # Returns a list of tuples of notes to use in generating a melody (note, octave)
 def get_valid_notes_in_range(starting_key: str, start_octave: int, difficulty: str) -> list[tuple[str, int]]:
-    # build list of (note, octave) tuples
-    # return valid_notes
+    # Build list of (note, octave) tuples
+    # Return valid_notes
     valid_notes = []
     scale = generate_major_scale(starting_key)
     starting_note = random.choice(scale)
@@ -75,28 +74,25 @@ def get_valid_notes_in_range(starting_key: str, start_octave: int, difficulty: s
                     valid_notes.append((note, octave))
     return valid_notes
 
-print(get_valid_notes_in_range('F', 4, 'hard'))
-
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
-def create_melody(key, difficulty):
-    # Making a list of note 
+def create_melody(starting_note: str, difficulty: str):
+    print(f"Current starting_note: {starting_note}")
     rhythms = generate_rhythm(difficulty)
-    scale = generate_major_scale(key)
-    pool_of_notes = get_valid_notes_in_range(scale, 4, difficulty)
+    pool_of_notes = get_valid_notes_in_range(starting_note, 4, difficulty)
     print(f"Current pool of notes: {pool_of_notes}")
-    pass
-    # num_notes = len(rhythms)
-    # settings = DIFFICULTY_SETTINGS[difficulty]
-    # max_interval = settings['max_interval']
-    # max_range = settings['range_octave']
 
-    # Make it so that if the number in octave changes, the semitones will be at least 12
-    # semitone_total = (octave difference * 12) + semitone
-    # for rhythm in rhythms:
+    note = []
+    # num_notes = len(rhythms)
+    first = True
+    for rhythm in rhythms:
         # Rhythm object = 'whole', 'half', etc
-        
-        
+        if first:
+            note.append((starting_note, 4, rhythm))
+            first = False
+        else:
+            note.append((random.choice(pool_of_notes), rhythm))
+        print(f"current note: {note}")
     # for note in range(num_notes):
     #     next_note = generate_note(
     #         # Step
@@ -109,3 +105,4 @@ def create_melody(key, difficulty):
         # generate note function signature:
         # generate_note(step, octave, duration, note_type, alter=None)
 
+print(create_melody('F', 'hard'))

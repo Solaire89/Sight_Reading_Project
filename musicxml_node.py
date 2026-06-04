@@ -1,5 +1,6 @@
 from constants import musicxml_head, musicxml_footer
 
+# If a note has a sharp or flat, this function will return either 1 (sharp) or -1 (flat)
 def get_alter_value(note_name):
     if '#' in note_name:
         return 1
@@ -9,7 +10,7 @@ def get_alter_value(note_name):
 
 # Note contents: <pitch> (<step> and <octave> within pitch), alter (flat or sharp),
 # duration (length of note in numbers), note type (quarter, half, whole, etc)
-def generate_note(step, octave, duration, note_type, alter=None):
+def generate_note(step: str, octave: int, duration: int, note_type: str, alter=None) -> str:
     if alter is not None:
         note = f'<note>\n<pitch>\n<step>{step}</step>\n<alter>{alter}</alter>\n<octave>{octave}</octave>\n</pitch>'
     else:
