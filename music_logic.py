@@ -1,5 +1,6 @@
 from constants import * # note_names_in_flat_keys, note_names_in_sharp_keys, DIFFICULTY_SETTINGS
-from musicxml_node import generate_note, create_attributes
+from musicxml_node import generate_note, create_attributes, get_alter_value
+from typing import Optional
 import random
 
 # Takes an input starting_note and returns the scale associated with that root note
@@ -33,10 +34,13 @@ def generate_major_scale(starting_note: str) -> list[str]:
     # Returns a list of the notes in the scale
     return major_scale_notes
 
-# Returns a list of rhythms to be paired with notes
-def generate_rhythm(difficulty: str) -> list[str]:
+# Returns a list of tuples of rhythms and durations to be paired with notes
+def generate_rhythm(difficulty: str) -> list[tuple[str, int]]:
     possible_rhythms = DIFFICULTY_SETTINGS[difficulty]['rhythms']
     # 'rhythms': ['whole', 'half', 'quarter']
+    duration = []
+    for rhythm in possible_rhythms:
+        duration.append((rhythm, RHYTHM_DURATION[rhythm]))
     remaining_duration = 16
     rhythm = []
     current_duration = 0
@@ -45,14 +49,15 @@ def generate_rhythm(difficulty: str) -> list[str]:
     while current_duration < remaining_duration:
         available_rhythms = list(filter(
             lambda x: RHYTHM_MAPPING[x]['duration'] <= remaining_duration, 
-            possible_rhythms))
+            possible_rhythms)
+            )
         current_rhythm = random.choice(available_rhythms)
-        rhythm.append(current_rhythm)
+        rhythm.append((current_rhythm, RHYTHM_DURATION[current_rhythm]))
         remaining_duration -= RHYTHM_MAPPING[current_rhythm]['duration']
     return rhythm
 
 # Returns a list of tuples of notes to use in generating a melody (note, octave)
-def get_valid_notes_in_range(starting_key: str, start_octave: int, difficulty: str) -> list[tuple[str, int]]:
+def get_valid_notes_in_range(starting_key: str, start_octave: int, difficulty: str) -> list[tuple[str, int, Optional[int]]]:
     # Build list of (note, octave) tuples
     # Return valid_notes
     valid_notes = []
@@ -63,46 +68,29 @@ def get_valid_notes_in_range(starting_key: str, start_octave: int, difficulty: s
     total_notes = DIFFICULTY_SETTINGS[difficulty]['total_notes']
     for octave in range(start_octave, start_octave + octave_range + 1):
         if octave == start_octave + octave_range and len(valid_notes) == total_notes - 1:
-            valid_notes.append((scale[current_position_index], octave))
+            valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
         if len(valid_notes) < total_notes:
             for note in scale[current_position_index:] + scale[:current_position_index]:
                 if current_position_index == scale[current_position_index]:
-                    valid_notes.append((scale[current_position_index], octave))
+                    valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
                 elif current_position_index > len(scale):
                     current_position_index %= len(scale)
                 else:
-                    valid_notes.append((note, octave))
+                    valid_notes.append((note, octave, get_alter_value(note)))
     return valid_notes
 
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
-def create_melody(starting_note: str, difficulty: str):
-    print(f"Current starting_note: {starting_note}")
+def create_melody(starting_note: str, difficulty: str) -> list[tuple[str, int, Optional[int]], tuple[str, int]]:
     rhythms = generate_rhythm(difficulty)
     pool_of_notes = get_valid_notes_in_range(starting_note, 4, difficulty)
-    print(f"Current pool of notes: {pool_of_notes}")
-
-    note = []
+    note_list = []
     # num_notes = len(rhythms)
-    first = True
     for rhythm in rhythms:
-        # Rhythm object = 'whole', 'half', etc
-        if first:
-            note.append((starting_note, 4, rhythm))
-            first = False
-        else:
-            note.append((random.choice(pool_of_notes), rhythm))
-        print(f"current note: {note}")
-    # for note in range(num_notes):
-    #     next_note = generate_note(
-    #         # Step
-    #         random.choice(scale), 
-    #         # Octave (need to be mindful of largest interval per difficulty)
-    #         random.choice())
-    #         # Duration
-            # Note_type
-            # Alter
-        # generate note function signature:
-        # generate_note(step, octave, duration, note_type, alter=None)
+        note = random.choice(pool_of_notes)
+        note_list.append((note, rhythm))
+    return note_list
+        # (('B', 4, None), ('16th', 1))
+        # generate_note(step, octave, alter, note_type, duration)
 
-print(create_melody('F', 'hard'))
+print(create_melody('B', 'hard'))

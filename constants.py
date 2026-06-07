@@ -43,6 +43,14 @@ fifths_keys_element = {
     'G': 1
 }
 
+RHYTHM_DURATION = {
+    '16th': 1,
+    'eighth': 2,
+    'quarter': 4,
+    'half': 8,
+    'whole': 16
+}
+
 DIFFICULTY_SETTINGS = {
     'easy': {
         'max_interval': 4,

@@ -1,16 +1,18 @@
 from constants import musicxml_head, musicxml_footer
 
 # If a note has a sharp or flat, this function will return either 1 (sharp) or -1 (flat)
-def get_alter_value(note_name):
+def get_alter_value(note_name: str) -> int:
     if '#' in note_name:
         return 1
     elif 'b' in note_name:
         return -1
-    return None
+    else:
+        return None
+
 
 # Note contents: <pitch> (<step> and <octave> within pitch), alter (flat or sharp),
 # duration (length of note in numbers), note type (quarter, half, whole, etc)
-def generate_note(step: str, octave: int, duration: int, note_type: str, alter=None) -> str:
+def generate_note(step: str, octave: int, alter, note_type: str, duration: int) -> str:
     if alter is not None:
         note = f'<note>\n<pitch>\n<step>{step}</step>\n<alter>{alter}</alter>\n<octave>{octave}</octave>\n</pitch>'
     else:
@@ -19,7 +21,7 @@ def generate_note(step: str, octave: int, duration: int, note_type: str, alter=N
     return note
 
 # This is the overall form of the music. Includes elements like key, clef, and time signature
-def create_attributes(divisions, fifths, beats, beat_type, sign, clef_line):
+def create_attributes(divisions: int, fifths: int, beats: int, beat_type: int, sign: str, clef_line: int) -> str:
     return f'''<attributes>\n<divisions>{divisions}</divisions>
     <key>\n<fifths>{fifths}</fifths>\n</key>
     <time>\n<beats>{beats}</beats>\n<beat-type>{beat_type}</beat-type>\n</time>
