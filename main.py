@@ -4,16 +4,23 @@ from musicxml_node import *
 
 def main():
     print("Welcome to the Site Reading Project!")
-    melody_measure = create_melody('F', 'hard')
-    for melody in melody_measure:
-        note = generate_note(*melody)
+    
     attribute_of_song = create_attributes(16, -1, 4, 4, 'G', 2)
-    print(f"Attributes: {attribute_of_song}")
     measure_list = []
-    for measure in range(0, 5):
-        measure_list.append(create_measure(melody_measure, 1, attribute_of_song))
-    print(f"Measure list: {measure_list}")
-    # with open("test.musicxml", "w") as f:
-    #     f.write(score)
+    note_list = []
+    for measure in range(1, 5):
+        melody_per_measure = create_melody('F', 'easy')
+        for melody in melody_per_measure:
+            note = generate_note(*melody)
+            note_list.append(note)
+        measure_form = create_measure(note_list, measure, attribute_of_song)
+        attribute_of_song = None
+        measure_list.append(measure_form)
+
+    score = create_full_score(measure_list)
+    with open("test.musicxml", "w") as f:
+        f.write(score)
+
+    return f
 
 main()

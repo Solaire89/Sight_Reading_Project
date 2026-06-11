@@ -14,32 +14,42 @@ def get_alter_value(note_name: str) -> int:
 # duration (length of note in numbers), note type (quarter, half, whole, etc)
 def generate_note(step: str, octave: int, alter, note_type: str, duration: int) -> str:
     if alter is not None:
-        note = f'<note>\n<pitch>\n<step>{step}</step>\n<alter>{alter}</alter>\n<octave>{octave}</octave>\n</pitch>'
+        note = f'''<note>
+        <pitch>
+        <step>{step}</step>
+        <alter>{alter}</alter>
+        <octave>{octave}</octave>
+        </pitch>'''
     else:
-        note = f'<note>\n<pitch>\n<step>{step}</step>\n<octave>{octave}</octave>\n</pitch>'
-    note += f'\n<duration>{duration}</duration>\n<type>{note_type}</type>\n</note>'
+        note = f'''<note>
+        <pitch>
+        <step>{step}</step>
+        <octave>{octave}</octave>
+        </pitch>'''
+    note += f'''<duration>{duration}</duration>
+        <type>{note_type}</type>
+        </note>'''
     return note
 
 # This is the overall form of the music. Includes elements like key, clef, and time signature
 def create_attributes(divisions: int, fifths: int, beats: int, beat_type: int, sign: str, clef_line: int) -> str:
-    return f'''<attributes>\n<divisions>{divisions}</divisions>
-    <key>\n<fifths>{fifths}</fifths>\n</key>
-    <time>\n<beats>{beats}</beats>\n<beat-type>{beat_type}</beat-type>\n</time>
-    <clef>\n<sign>{sign}</sign>\n<line>{clef_line}</line>\n</clef>\n</attributes>'''
-
+    return f'''<attributes><divisions>{divisions}</divisions>
+    <key><fifths>{fifths}</fifths></key>
+    <time><beats>{beats}</beats><beat-type>{beat_type}</beat-type></time>
+    <clef><sign>{sign}</sign><line>{clef_line}</line></clef></attributes>'''
 
 # Each measure needs to be wrapped by the measure tag. The first part of the piece requires the
 # attributes section.
 def create_measure(notes, measure_number, attributes=None):
     if attributes:
-        measure = f'<measure number="{measure_number}">' + attributes + "\n".join(notes) + '</measure>'
+        measure = f'<measure number="{measure_number}">' + attributes + "".join(notes) + '</measure>'
     else:
-        measure = f'<measure number="{measure_number}">{"\n".join(notes)}</measure>'
+        measure = f'<measure number="{measure_number}">' + "".join(notes) + '</measure>'
     return measure
 
 def create_full_score(measures):
     # combine everything
-    return musicxml_head + '<part id="P1">' + "\n".join(measures) + musicxml_footer
+    return musicxml_head + '<part id="P1">' + "".join(measures) + musicxml_footer
 
 # Test to generate a musicxml file
 # note1 = generate_note("C", 4, 4, "quarter")
@@ -61,6 +71,3 @@ def create_full_score(measures):
 # first_two_measures = [measure1, measure2]
 
 # score = create_full_score(first_two_measures)
-
-# with open("test.musicxml", "w") as f:
-#     f.write(score)

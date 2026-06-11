@@ -81,7 +81,7 @@ def get_valid_notes_in_range(starting_key: str, start_octave: int, difficulty: s
 
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
-def create_melody(starting_note: str, difficulty: str):
+def create_melody(starting_note: str, difficulty: str) -> list[tuple[str, int, int, str, int]]:
     rhythms = generate_rhythm(difficulty)
     pool_of_notes = get_valid_notes_in_range(starting_note, 4, difficulty)
     note_list = []
@@ -90,7 +90,4 @@ def create_melody(starting_note: str, difficulty: str):
         current_note = (*note, *rhythm)
         note_list.append(current_note)
     return note_list
-        # (('B', 4, None), ('16th', 1))
         # generate_note(step, octave, alter, note_type, duration)
-
-print(create_melody('B', 'hard'))
