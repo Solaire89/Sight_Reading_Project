@@ -5,16 +5,13 @@ import random
 
 # Takes an input starting_note and returns the scale associated with that root note
 def generate_major_scale(starting_note: str) -> list[str]:
-    flat_keys = ['C', 'F', 'Bb', 'Eb', 'Ab', 'Gb', 'Cb']
+    flat_keys = ['C', 'F', 'Bb', 'Eb', 'Ab', 'Gb']
     sharp_keys = ['G', 'D', 'A', 'E', 'B']
     intervals = [2, 2, 1, 2, 2, 2, 1]
     if starting_note in flat_keys:
         notes = note_names_in_flat_keys
     elif starting_note in sharp_keys:
         notes = note_names_in_sharp_keys
-    
-    else:
-        raise KeyError("Invalid scale name, please try again.")
     major_scale_index = []
     current_position_int = notes[starting_note]
 
@@ -33,6 +30,7 @@ def generate_major_scale(starting_note: str) -> list[str]:
     
     # Returns a list of the notes in the scale
     return major_scale_notes
+
 
 # Returns a list of tuples of rhythms and durations to be paired with notes
 def generate_rhythm(difficulty: str) -> list[tuple[str, int]]:

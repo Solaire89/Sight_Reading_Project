@@ -3,17 +3,18 @@ from music_logic import create_melody
 from musicxml_node import *
 
 def main():
-    print("Welcome to the Site Reading Project!")
+    print("Welcome to the Sight Reading Project!")
     
-    attribute_of_song = create_attributes(16, -1, 4, 4, 'G', 2)
+    attribute_of_song = create_attributes(16, 5, 4, 4, 'G', 2)
     measure_list = []
-    note_list = []
-    for measure in range(1, 5):
-        melody_per_measure = create_melody('F', 'easy')
-        for melody in melody_per_measure:
-            note = generate_note(*melody)
-            note_list.append(note)
-        measure_form = create_measure(note_list, measure, attribute_of_song)
+    
+    for measure_num in range(1, 17):
+        note_list = []
+        melody_per_measure = create_melody('B', 'easy')
+        for note in melody_per_measure:
+            note_xml = generate_note(*note)
+            note_list.append(note_xml)
+        measure_form = create_measure(note_list, measure_num, attribute_of_song)
         attribute_of_song = None
         measure_list.append(measure_form)
 

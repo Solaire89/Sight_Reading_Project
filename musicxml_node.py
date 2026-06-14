@@ -13,23 +13,23 @@ def get_alter_value(note_name: str) -> int:
 # Note contents: <pitch> (<step> and <octave> within pitch), alter (flat or sharp),
 # duration (length of note in numbers), note type (quarter, half, whole, etc)
 def generate_note(step: str, octave: int, alter, note_type: str, duration: int) -> str:
-    if alter is not None:
-        note = f'''<note>
+    pitch_step = f'''<note>
         <pitch>
-        <step>{step}</step>
-        <alter>{alter}</alter>
-        <octave>{octave}</octave>
+        <step>{step[0]}</step>'''
+    pitch_octave = f'''<octave>{octave}</octave>
         </pitch>'''
+    if alter:
+        note = pitch_step 
+        + f"<alter>{alter}</alter>"
+        + pitch_octave
     else:
-        note = f'''<note>
-        <pitch>
-        <step>{step}</step>
-        <octave>{octave}</octave>
-        </pitch>'''
+        note = pitch_step + pitch_octave
     note += f'''<duration>{duration}</duration>
         <type>{note_type}</type>
         </note>'''
     return note
+
+print(f"Generated note: {generate_note('B', 4, 0, 'whole', 16)}")
 
 # This is the overall form of the music. Includes elements like key, clef, and time signature
 def create_attributes(divisions: int, fifths: int, beats: int, beat_type: int, sign: str, clef_line: int) -> str:
@@ -51,23 +51,3 @@ def create_full_score(measures):
     # combine everything
     return musicxml_head + '<part id="P1">' + "".join(measures) + musicxml_footer
 
-# Test to generate a musicxml file
-# note1 = generate_note("C", 4, 4, "quarter")
-# note2 = generate_note("D", 4, 4, "quarter")
-# note3 = generate_note("E", 4, 4, "quarter")
-# note4 = generate_note("F", 4, 4, "quarter")
-# note5 = generate_note("B", 4, 4, "quarter")
-# note6 = generate_note("F", 4, 4, "quarter")
-# note7 = generate_note("G", 4, 4, "quarter")
-# note8 = generate_note("C", 5, 4, "quarter")
-
-# notes_list1 = [note1, note2, note3, note4]
-# notes_list2 = [note5, note6, note7, note8]
-# attrs = create_attributes(4, 0, 4, 4, "G", 2)
-
-# measure1 = create_measure(notes_list1, 1, attrs)
-# measure2 = create_measure(notes_list2, 2)
-
-# first_two_measures = [measure1, measure2]
-
-# score = create_full_score(first_two_measures)
