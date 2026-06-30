@@ -60,24 +60,35 @@ def get_valid_notes_in_range(starting_key, start_octave, difficulty):
     valid_notes = []
     scale = generate_major_scale(starting_key)
     starting_note = random.choice(scale)
+    print(f"Starting note: {starting_note}")
     current_position_index = scale.index(starting_note)
+    scale = scale[current_position_index:] + scale[:current_position_index]
     octave_range = DIFFICULTY_SETTINGS[difficulty]['range_octave']
     total_notes = DIFFICULTY_SETTINGS[difficulty]['total_notes']
     for octave in range(start_octave, start_octave + octave_range + 1):
-        if octave == start_octave + octave_range and len(valid_notes) == total_notes - 1:
-            valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
-        if len(valid_notes) < total_notes:
-            for note in scale[current_position_index:] + scale[:current_position_index]:
-                if current_position_index == scale[current_position_index]:
-                    valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
-                    print(f"Valid note after if block: {valid_notes}")
-                elif current_position_index > len(scale):
-                    current_position_index %= len(scale)
-                else:
-                    valid_notes.append((note, octave, get_alter_value(note)))
+        for note in scale:
+            print(f"Note: {note}")
+            valid_notes.append((note, octave, get_alter_value(note)))
+            if len(valid_notes) == total_notes:
+                break
+
+
+
+        # if octave == start_octave + octave_range and len(valid_notes) == total_notes - 1:
+        #     valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
+        #     print(f"Valid notes list in first if statment: {valid_notes}")
+        # if len(valid_notes) < total_notes:
+        #     for note in scale[current_position_index:] + scale[:current_position_index]:
+        #         if current_position_index == scale[current_position_index]:
+        #             valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
+        #         elif current_position_index > len(scale):
+        #             current_position_index %= len(scale)
+        #         else:
+        #             valid_notes.append((note, octave, get_alter_value(note)))
     return valid_notes
 
-print(f"Note pool: {get_valid_notes_in_range('B', 4, 'hard')}")
+
+print(f"Note pool: {get_valid_notes_in_range('Bb', 4, 'hard')}")
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
 def create_melody(starting_note, difficulty):
