@@ -1,7 +1,8 @@
 from constants import * # note_names_in_flat_keys, note_names_in_sharp_keys, DIFFICULTY_SETTINGS
-from musicxml_node import generate_note, create_attributes, get_alter_value
+from musicxml_node import get_alter_value
 from typing import Optional
 import random
+
 
 # Takes an input starting_note and returns the scale associated with that root note
 def generate_major_scale(starting_note):
@@ -59,32 +60,23 @@ def get_valid_notes_in_range(starting_key, start_octave, difficulty):
     # Return valid_notes
     valid_notes = []
     scale = generate_major_scale(starting_key)
+    print(f"Current key: {scale}")
     starting_note = random.choice(scale)
     print(f"Starting note: {starting_note}")
     current_position_index = scale.index(starting_note)
-    scale = scale[current_position_index:] + scale[:current_position_index]
+    
     octave_range = DIFFICULTY_SETTINGS[difficulty]['range_octave']
     total_notes = DIFFICULTY_SETTINGS[difficulty]['total_notes']
     for octave in range(start_octave, start_octave + octave_range + 1):
         for note in scale:
+            if current_position_index > len(scale):
+                current_position_index %= len(scale)
+            if 'C' in note:
+                octave += 1
             print(f"Note: {note}")
             valid_notes.append((note, octave, get_alter_value(note)))
             if len(valid_notes) == total_notes:
                 break
-
-
-
-        # if octave == start_octave + octave_range and len(valid_notes) == total_notes - 1:
-        #     valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
-        #     print(f"Valid notes list in first if statment: {valid_notes}")
-        # if len(valid_notes) < total_notes:
-        #     for note in scale[current_position_index:] + scale[:current_position_index]:
-        #         if current_position_index == scale[current_position_index]:
-        #             valid_notes.append((scale[current_position_index], octave, get_alter_value(note)))
-        #         elif current_position_index > len(scale):
-        #             current_position_index %= len(scale)
-        #         else:
-        #             valid_notes.append((note, octave, get_alter_value(note)))
     return valid_notes
 
 
