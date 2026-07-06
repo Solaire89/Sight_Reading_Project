@@ -14,7 +14,6 @@ def main():
         print(f"Melody per measure: {melody_per_measure}")
         for note in melody_per_measure:
             note_xml = generate_note(*note)
-            print(f"Note xml: {note_xml}")
             note_list.append(note_xml)
         measure_form = create_measure(note_list, measure_num, attribute_of_song)
         attribute_of_song = None

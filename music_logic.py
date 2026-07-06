@@ -60,9 +60,7 @@ def get_valid_notes_in_range(starting_key, start_octave, difficulty):
     # Return valid_notes
     valid_notes = []
     scale = generate_major_scale(starting_key)
-    print(f"Current key: {scale}")
     starting_note = random.choice(scale)
-    print(f"Starting note: {starting_note}")
     current_position_index = scale.index(starting_note)
     
     octave_range = DIFFICULTY_SETTINGS[difficulty]['range_octave']
@@ -73,23 +71,20 @@ def get_valid_notes_in_range(starting_key, start_octave, difficulty):
                 current_position_index %= len(scale)
             if 'C' in note:
                 octave += 1
-            print(f"Note: {note}")
             valid_notes.append((note, octave, get_alter_value(note)))
             if len(valid_notes) == total_notes:
                 break
     return valid_notes
 
-
-print(f"Note pool: {get_valid_notes_in_range('Bb', 4, 'hard')}")
 # Create a melody from the key provided (a string) with the number of notes provided
 # Difficulty will determine all of the elements to be added to each sequence of notes
 def create_melody(starting_note, difficulty):
     rhythms = generate_rhythm(difficulty)
     pool_of_notes = get_valid_notes_in_range(starting_note, 4, difficulty)
+    print(f"Pool of notes: {pool_of_notes}")
     note_list = []
     for rhythm in rhythms:
         note = random.choice(pool_of_notes)
-        print(f"Current note: {note}")
         current_note = (*note, *rhythm)
         note_list.append(current_note)
     return note_list
